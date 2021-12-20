@@ -1,0 +1,80 @@
+# Normalization
+
+## Not normalized
+
+Student#   Advisor   Adv-Room   Class1   Class2   Class3
+1022       Jones     412        101-07   143-01   159-02
+4123       Smith     216        201-01   211-02   214-01
+
+1NF - No Repeating Groups
+
+Tables should have only a single field for each attribute. 
+
+Student#   Advisor   Adv-Room   Class#
+1022       Jones     412        101-07
+1022       Jones     412        143-01
+1022       Jones     412        159-02
+4123       Smith     216        201-01
+4123       Smith     216        211-02
+4123       Smith     216        214-01
+
+2NF - Eliminate Redundant Data
+
+Student
+
+Student#    Advisor   Adv-Room
+1022        Jones     412
+4123        Smith     216
+
+Registration
+
+Student#  Class#
+1022      101-07
+1022      143-01
+1022      159-02
+4123      201-01
+4123      211-02
+4123      214-01
+
+3NF: Eliminate Data Not Dependent on Key
+
+Student
+
+Student#  Advisor
+1022      Jones
+4123      Smith
+
+Faculty
+
+Name  Room  Dept
+Jones 412 42
+Smith 216 42
+
+Normalized tables:
+
+Student
+_______
+Student#  Advisor##
+1022      Jones
+4123      Smith
+
+Registration
+____________
+Student##  Class#
+1022       101-07
+1022       143-01
+1022       159-02
+4123       201-01
+4123       211-02
+4123       214-01
+
+Faculty
+_______
+Name#  Room  Dept
+Jones  412   42
+Smith  216   42
+
+
+
+
+
