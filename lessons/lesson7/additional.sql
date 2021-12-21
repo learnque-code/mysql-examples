@@ -150,3 +150,17 @@ ORDER BY custid, empid;
 
 -- Do not forget to explain how to do advanced delete and update!!!
 UPDATE ... INNER JOIN ...
+
+UPDATE OrderDetails AS OD
+    INNER JOIN Orders AS O
+    ON OD.orderid = O.orderid
+SET discount = discount + 0.05
+WHERE O.custid = 1;
+
+-- Update with limit
+
+UPDATE OrderDetails AS OD
+  INNER JOIN Orders AS O
+  ON OD.orderid = O.orderid
+SET discount = discount + 0.05
+LIMIT 1;
