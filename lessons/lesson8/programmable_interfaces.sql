@@ -134,6 +134,64 @@ CALL dowhile(@result);
 
 SELECT @result AS v1;
 
+-- ------
+
+DELIMITER $$
+
+CREATE OR REPLACE PROCEDURE dowhile(OUT result INT)
+BEGIN
+  DECLARE v1 INT DEFAULT 5;
+  myloop: WHILE v1 > 0 DO
+    IF v1 = 3 THEN
+        LEAVE myloop; -- similar to BREAK
+    END IF;
+    SET v1 = v1 - 1;
+  END WHILE;
+  SET result = v1;
+END;
+$$
+
+CALL dowhile(@result);
+
+SELECT @result AS v1;
+
+-- REPEAT
+
+DELIMITER $$
+
+CREATE OR REPLACE PROCEDURE dorepeat(IN p1 INT, OUT result INT)
+  BEGIN
+    DECLARE x INT;
+    SET x = 0;
+    REPEAT SET x = x + 1; UNTIL x >= p1 END REPEAT;
+    SET result = x;
+  END;
+$$
+
+DELIMITER $$
+
+CALL dorepeat(1000, @r);
+
+SELECT @r;
+
+-- Leave example
+
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE proc(IN p TINYINT)
+whole_proc:
+BEGIN
+   SELECT 1 AS `info message`;
+   IF p < 1 THEN
+      LEAVE whole_proc;
+   END IF;
+   SELECT 2 AS `info message`;
+END;
+$$
+
+DELIMITER ;
+
+CALL proc(5);
+
 -- SIGNAL
 
 CREATE PROCEDURE test_error(x INT)

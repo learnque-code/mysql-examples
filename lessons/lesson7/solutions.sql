@@ -20,7 +20,14 @@ INSERT INTO CustomersWithOrders(custid, companyname, country, region, city)
     (SELECT * FROM Orders AS O
      WHERE O.custid = C.custid);
 
+-- Or with inner join
+
+INSERT INTO CustomersWithOrders(custid, companyname, country, region, city)
+SELECT DISTINCT C.custid, companyname, country, region, city FROM Customers AS C
+    INNER JOIN Orders O on C.custid = O.custid;
+
 -- Solution 2
+
 DROP TABLE IF EXISTS Orders2014_2016;
 
 CREATE TABLE Orders2014_2016
@@ -81,6 +88,7 @@ UPDATE CustomersForUpdate
 WHERE region IS NULL;
 
 -- Solution 6
+
 CREATE OR REPLACE TABLE OrdersForUpdate SELECT * FROM Orders;
 
 UPDATE OrdersForUpdate AS OU

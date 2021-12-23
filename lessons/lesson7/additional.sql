@@ -32,7 +32,7 @@ CREATE TABLE MyCustomers LIKE Customers;
 -- CREATE TABLE SELECT
 -- -----------------------------------------------------------------------------
 
-CREATE TABLE Locations AS SELECT country, region, city FROM Customers;
+CREATE TABLE Locations SELECT country, region, city FROM Customers;
 
 -- -----------------------------------------------------------------------------
 -- export example
